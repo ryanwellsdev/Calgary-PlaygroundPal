@@ -1,0 +1,23 @@
+.mainContainer{
+    display: flex;
+    height: 100%;
+}
+.playgroundList{
+    flex: 3;
+    height: 100%;
+    .wrapper{
+        padding-right: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        overflow-y: scroll;
+       height: 100%;
+       padding-bottom: 50px;
+    }
+}
+.mapContainer{
+    flex: 3;
+    padding-left: 20px;
+    height: 100%;
+}
+

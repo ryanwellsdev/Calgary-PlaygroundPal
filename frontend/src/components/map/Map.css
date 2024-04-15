@@ -3,3 +3,17 @@
     height: 100%;
     border-radius: 20px;
 }
+
+.playground{
+    fill: none;
+    stroke: red;
+    stroke-width: 5px;
+    transition: stroke-width .5s;
+}
+.playground:hover{
+    stroke-width: 15px;
+}
+
+.leaflet-container {
+    background-color: #f0f0f0; /* Set your desired background color */
+  }

@@ -1,24 +1,23 @@
-import React from "react";
 import "./Playground.css";
 import Filter from "../../components/filter/Filter";
 import Card from "../../components/card/Card";
 import Map from "../../components/map/Map";
-import { Data } from "../../Playground";
 
-const Playground = () => {
-  const data = Data;
+const Playground = ({ playgroundInfo }) => {
   return (
     <div className="mainContainer">
       <div className="playgroundList">
+        <Filter />
         <div className="wrapper">
-          <Filter />
-          {data.map((item) => (
-            <Card key={item.id} item={item} />
-          ))}
+          {playgroundInfo?.length > 0 ? (
+            playgroundInfo?.map((info) => <Card key={info._id} {...info} />)
+          ) : (
+            <p>Loading playground information...</p>
+          )}
         </div>
       </div>
       <div className="mapContainer">
-        <Map items={data} />
+        <Map items={playgroundInfo} />
       </div>
     </div>
   );

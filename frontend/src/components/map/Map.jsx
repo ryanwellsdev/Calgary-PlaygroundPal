@@ -1,84 +1,85 @@
-import React, { useEffect, useState, useRef } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Polygon,
-  ZoomControl,
-  LayersControl,
-} from "react-leaflet";
-import "./Map.css";
+import React, { useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+import * as L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import Pin from "../pin/Pin";
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+import "leaflet.markercluster";
+import "./Map.css";
 
-import L from "leaflet";
-import { jakarta } from "../../Playground";
-
-const customIcon = new L.Icon({
-  iconUrl: "./playground.png",
-  iconSize: [41, 41],
-  className: "custom-marker-icon",
+const customIcon = L.icon({
+  iconUrl: "./Marker.svg",
+  iconSize: [35, 35],
 });
 
-const calgary = [51.0478, 114.0593];
-
 const Map = ({ items }) => {
-  const mapRef = useRef();
-  const [coordinates, setCoordinates] = useState([]);
+  const mapRef = useRef(null);
+  const clusterLayerRef = useRef(null);
+
   useEffect(() => {
-    setCoordinates(jakarta.map((row) => [row[1], row[0]]));
+    if (!mapRef.current) {
+      const mapNode = ReactDOM.findDOMNode(document.getElementById("map"));
+      if (!mapNode) return;
+
+      mapRef.current = L.map(mapNode, {
+        center: [51.049999, -114.066666],
+        zoom: 10,
+      });
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 17,
+      }).addTo(mapRef.current);
+    }
   }, []);
 
   useEffect(() => {
-    const { current } = mapRef;
-
-    if (current) {
-      const { LeafletElement: map } = current;
-
-      setTimeout(() => {
-        map.flyTo(calgary, 14, {
-          duration: 3,
-        });
-      }, 1000);
+    if (clusterLayerRef.current) {
+      mapRef.current.removeLayer(clusterLayerRef.current);
     }
-  }, [mapRef]);
 
-  const { BaseLayer } = LayersControl;
+    clusterLayerRef.current = L.markerClusterGroup();
+
+    items.forEach((item) => {
+      if (item?.surface?.the_geom?.coordinates) {
+        const polygonCoordinates = item.surface.the_geom.coordinates[0][0].map(
+          ([lng, lat]) => [lat, lng]
+        );
+        const markerPosition = polygonCoordinates[0];
+        const popupContent = `
+        <div class="popupContainer">
+          <p class="link">
+            <span class="nameSpan">Name:</span>
+            ${
+              item.name && item.name.SITE_NAME
+                ? item.name.SITE_NAME
+                : "Community Park Playground"
+            }
+          </p>
+          <p class="link">
+            <span class="communitySpan">Community:</span>
+            ${item.name.COMMUNITY_NAME}
+          </p>
+        </div>
+      `;
+        const marker = L.marker(markerPosition, { icon: customIcon })
+          .bindPopup(popupContent)
+          .addTo(clusterLayerRef.current);
+      }
+    });
+
+    mapRef.current.addLayer(clusterLayerRef.current);
+  }, [items]);
+
   return (
-    <MapContainer
-      center={[51.049999, -114.066666]}
-      zoom={8}
-      ZoomControl={false}
-      scrollWheelZoom={false}
-      className="map"
-      bounds={coordinates}
-      boundsOptions={{ padding: [1, 1] }}
-      ref={mapRef}
-    >
-      <LayersControl>
-        <BaseLayer checked name="OpenStreetMap">
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-        </BaseLayer>
-        <BaseLayer name="NASA Gibs Blue Marble">
-          <TileLayer
-            url="https://gibs-{s}.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief_Bathymetry/default//EPSG3857_500m/{z}/{y}/{x}.jpeg"
-            attribution="&copy; NASA Blue Marble, image service by OpenGeo"
-          />
-        </BaseLayer>
-      </LayersControl>
-      <Polygon
-        color="red"
-        weight={10}
-        positions={coordinates}
-        className="playground"
-      />
-      <ZoomControl position="bottomright" zoomInText="🍁" zoomOutText="🗺️" />
-      {items.map((item) => (
-        <Pin item={item} key={item.id} customIcon={customIcon} />
-      ))}
-    </MapContainer>
+    <div
+      id="map"
+      style={{
+        width: "100%",
+        height: "100%",
+        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+        borderTopLeftRadius: "10px",
+      }}
+    />
   );
 };
 

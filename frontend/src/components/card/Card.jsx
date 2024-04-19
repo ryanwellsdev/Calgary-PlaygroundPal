@@ -2,36 +2,39 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Card.css";
 
-const Card = ({ item }) => {
-  console.log(item);
+const Card = (props) => {
+  const renderEquipment = (equipment) => {
+    return equipment?.equipment?.map((item, index) => (
+      <div key={index} className="playground">
+        <p className={`ageClass ${item.EQUIPMENT_AGE_CLASS ? "hasAge" : ""}`}>
+          {item.EQUIPMENT_AGE_CLASS}
+        </p>
+        <p className="descriptiontype">{item.TYPE_DESCRIPTION}</p>
+        {/* <p>{item.MAINT_INFO}</p> */}
+      </div>
+    ));
+  };
+  const { name, equipment } = props;
+
   return (
     <div className="card">
-      <Link to={`/playground/${item.id}`} className="imageContainer">
-        <img src={item.images} alt="" />
-      </Link>
       <div className="textContainer">
         <div className="nameContainer">
-          <h2 className="title">
-            <Link to={`/playground/${item.id}`} className="link">
-              {item.name}
-            </Link>
-          </h2>
-          <p className="description">{item.description}</p>
-        </div>
+          <h3 className="title">
+            {name && name.SITE_NAME
+              ? name.SITE_NAME
+              : "Community Park Playground"}
+          </h3>
 
-        <div className="bottom">
-          <p className="address">
-            <img src="/pin.png" alt="" />
-            <span>{item.address}</span>
-          </p>
-          <div className="features">
-            {item.amenities.map((a) => (
-              <div className="feature">
-                <span>{a}</span>
-              </div>
-            ))}
+          <div className="community">
+            <p className="address">
+              <img src="/pin.svg" alt="" />
+            </p>
+            <p className="description">{name.COMMUNITY_NAME}</p>
           </div>
         </div>
+
+        <div className="features">{renderEquipment(equipment).slice(0, 3)}</div>
       </div>
     </div>
   );

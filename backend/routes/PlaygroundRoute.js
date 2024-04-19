@@ -57,4 +57,48 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/paginated", async (req, res) => {
+  try {
+    let { page, limit } = req.query;
+    page = parseInt(page, 10) || 1;
+    limit = parseInt(limit, 10) || 10;
+    const skip = (page - 1) * limit;
+
+    const equipmentData = await PlaygroundEquipment.find({})
+      .skip(skip)
+      .limit(limit);
+
+    const playgrounds = await Promise.all(
+      equipmentData.map(async (equipment) => {
+        const assetCd = equipment.ASSET_CD;
+        const nameData = await PlaygroundName.findOne({ ASSET_CD: assetCd });
+        const surfaceData = await PlaygroundSurface.findOne({
+          ASSET_CD: assetCd,
+        });
+
+        return {
+          ASSET_CD: assetCd,
+          equipment,
+          name: nameData,
+          surface: surfaceData,
+        };
+      })
+    );
+
+    const totalCount = await PlaygroundEquipment.countDocuments({});
+    const totalPages = Math.ceil(totalCount / limit);
+
+    res.json({
+      playgrounds,
+      currentPage: page,
+      totalPages,
+      totalCount,
+      limit,
+    });
+  } catch (error) {
+    console.error("Error fetching paginated playgrounds:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 export default router;

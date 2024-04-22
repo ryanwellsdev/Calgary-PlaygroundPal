@@ -1,0 +1,126 @@
+
+h2 {
+    font-family: "Syne", sans-serif;
+    text-align: center;
+    color: #492B6B;
+    font-size: 3em;
+    font-weight: normal;
+    letter-spacing: .1rem;
+    padding-top: 50px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-family: "Syne", sans-serif;
+    text-align: center;
+    color: #492B6B;
+
+    font-weight: 600px;
+    letter-spacing: .1rem;
+    width: 100%;
+    margin: 0 auto;
+    
+}
+
+p {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  font-size: 1.2em;
+  margin-left: 40px;
+  margin-right: 40px;
+  line-height: 2cap;
+  margin-top: 50px;
+}
+
+body {
+    height: 800px;
+    background: linear-gradient(62deg, #b1afd3, #a8ccec, #9cd3d5, #b2dcc1, #fce9b1);
+    animation: gradient 8s ease infinite; 
+    background-size: 400% 400%;
+    background-repeat: no-repeat;
+       
+}
+
+@media screen and (max-width : 320px)
+{
+  h1
+  {
+    font-size: 3em;
+  }
+}
+
+@media screen and (max-width : 500px)
+{
+  h1
+  {
+    font-size: 3em;
+  }
+}
+@media screen and (max-width : 1204px)
+{
+  h1
+  {
+    font-size: 4em;
+  }
+}
+
+
+@-webkit-keyframes gradient{
+    0% {
+      background-position: 0 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+       background-position: 0% 50%;
+    }
+  }
+  @keyframes gradient{
+    0% {
+      background-position: 0 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+       background-position: 0% 50%;
+    }
+  }
+
+
+.landing_page_button {
+    font-family: "Syne", sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    background: 
+    linear-gradient(#492B6B, #492B6B) padding-box,
+    linear-gradient(60deg, #f8d345, #00b2b4) border-box;
+    color: white;
+    padding: 20px 70px;
+    border: 5px solid transparent;
+    border-radius: 40px;
+    margin: 0 auto;
+    display: block;
+    font-size: 1.5em;
+    margin-top: 60px;
+    margin-right: 20px;
+    margin-left: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.color_logo_landing {
+  margin: 0 auto;
+  display: block;
+  max-width: 70%;
+  margin-top: 40px;
+}
+
+.hand_icon_landing {
+  margin: 0 auto;
+  display: block;
+  max-width: 15%;
+  margin-top: 30px;
+}

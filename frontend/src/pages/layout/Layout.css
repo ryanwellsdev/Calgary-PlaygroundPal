@@ -5,6 +5,7 @@
     margin-right: auto;
     padding-left: 20px;
     
+width: 100%;
 }
 
 
@@ -12,17 +13,18 @@
     height: calc(100vh - 70px);
     overflow: hidden;
 }
-/* @media (max-width:738px) {
+ @media (max-width:738px) {
 for small size   
 max-width:640px 
-} */
+} 
 
-/* @media (max-width:1024px) {
+ @media (max-width:1024px) {
  for medium size   
  max-width: 768px
-} */
+} 
 
-/* @media (max-width:1366px) {
+ @media (max-width:1366px) {
     max-wdith: 1280px
  for large size   
-} */
+} 
+

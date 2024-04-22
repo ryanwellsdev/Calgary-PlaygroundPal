@@ -23,17 +23,17 @@ label{
             display: flex;
             width: 100%;
             position: relative;
-          
+            
             .search-icon{
                 position: absolute;
                 right: 10px;
-                top: 10px;
+                top: 14px;
                 width: 20px;
             }
         }
         .inputSearch input{
             outline: none;
-            border: 1px solid #e0e0e0;
+            border: 1px solid #492B6B;
             border-radius: 5px;
             padding-left: 10px;
             padding-right: 30px;
@@ -59,41 +59,102 @@ label{
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    .item{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        .inputLocation{
-            display: flex;
-            width: 100%;
-            position: relative;
-          
-            .location-icon{
-                position: absolute;
-                right: 10px;
-                top: 12px;
-                width: 20px;
-            }
-        }
-        .inputLocation input{
-            outline: none;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            padding-left: 10px;
-            padding-right: 30px;
-        }
-        input{
-            width: 100%;
-        }
-        input, select{
-            outline: none;
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            font-size: 14px;
-}
-    }
+    
 }
 }
+
+.locationButton {
+  align-items: center;
+  background-color: #492B6B;
+  border: 2px solid #FAEBD7;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  fill: white;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: -.8px;
+  line-height: 24px;
+  min-width: 140px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  
+}
+.locationText{
+    padding-left: 5px;
+}
+.icon{
+font-size: 20px;
+font-weight: 900;
+}
+
+.locationButton:focus {
+  color: #171e29;
+}
+
+.locationButton:hover {
+  background-color: #6c4698;
+  border-color: #533575;
+  fill: #06f;
+}
+
+.locationButton:active {
+  background-color: #492B6B;
+  border-color: #492B6B;
+  fill: #06f;
+}
+
+@media (min-width: 768px) {
+  .locationButton {
+    min-width: 170px;
+  }
+}
+
+
+
+.filterButton {
+  background-color: #6c4698;
+  border-radius: 4px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  max-width: none;
+  min-height: 44px;
+  min-width: 10px;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 20px 8px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+.filterButton:hover,
+.filterButton:focus {
+  opacity: .75;
+}
+
+
+
+

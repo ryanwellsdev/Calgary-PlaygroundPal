@@ -7,17 +7,22 @@
     height: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+ 
     .wrapper{
+        flex: 1;
         display: flex;
         flex-direction: column;
         gap: 30px;
-        overflow-y: scroll;
-       height: 100%;
-       padding-bottom: 50px;
-       padding-right: 5px;
-       padding-left: 5px;
-       padding-top: 5px;
+        padding-right: 5px;
+        padding-left: 5px;
+        padding-top: 5px;
+        overflow-y: auto; 
+    
     }
+     
+    
 }
 .mapContainer{
     flex: 3;
@@ -27,3 +32,86 @@
     
 }
 
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Adjust based on your needs */
+    width: 100%;
+  }
+  
+
+
+.loader{
+    width: 12px;
+    height: 12px;
+    background-color:#492B6B;
+    border-radius: 50%;
+    box-shadow: 32px 0 #492B6B, -32px 0 #492B6B;
+    position: relative;
+    animation: flash 0.5s ease-in infinite alternate;
+    
+}
+.loader::before,
+.loader::after{
+    content: "";
+    position: absolute;
+    left: -64px;
+    top: 0;
+    background-color: #492B6B;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+   transform-origin: 35px -35px;
+   transform: rotate(45deg);
+   animation: hitL 0.5s ease-in infinite alternate;
+}
+.loader::after{
+    left: 64px;
+    transform: rotate(-45deg);
+    transform-origin: -35px -35px;
+    animation: hitR 0.5s ease-out infinite alternate;
+}
+@keyframes flash{
+    0%, 
+    100%{
+        background-color: bisque;
+        box-shadow: 
+        32px 0 bisque,
+        -32px 0 bisque;
+    }
+    25%{
+        background-color: bisque;
+        box-shadow: 32px 0 bisque, -32px 0 #492B6B;
+    }
+    50%{
+        background-color: #492B6B;
+        box-shadow: 32px 0 bisque, -32px 0 bisque;
+    }
+    75%{
+        background-color: bisque;
+        box-shadow: 32px 0 #492B6B, -32px 0 bisque;
+    }
+}
+
+@keyframes hitL {
+    0% {
+        transform: rotate(0deg); 
+        background-color: #492B6B; /* Set the initial background color */
+    }
+    25%, 100% {
+        transform: rotate(45deg); /* Adjust the rotation angle to 45deg */
+        background-color: bisque;
+    }
+}
+@keyframes hitR{
+    0%,75%{
+        transform: rotate(0deg);
+        background-color: bisque;
+    }
+    100%{
+        transform: rotate(-45deg);
+        background-color: #492B6B;
+    }
+
+}

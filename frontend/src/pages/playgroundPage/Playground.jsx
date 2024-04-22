@@ -1,24 +1,104 @@
+import React, { useEffect, useState } from "react";
 import "./Playground.css";
 import Filter from "../../components/filter/Filter";
 import Card from "../../components/card/Card";
 import Map from "../../components/map/Map";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Playground = ({ playgroundInfo }) => {
+  const [filteredPlaygrounds, setFilteredPlaygrounds] = useState([]);
+
+  useEffect(() => {
+    setFilteredPlaygrounds(playgroundInfo);
+  }, [playgroundInfo]);
+
+  const handleClusterClick = (clusterItems) => {
+    setFilteredPlaygrounds(clusterItems);
+  };
+
+  const handleSearch = (searchTerm) => {
+    if (!searchTerm.trim()) {
+      setFilteredPlaygrounds(playgroundInfo);
+    } else {
+      const filtered = playgroundInfo?.filter((info) =>
+        info?.name?.SITE_NAME?.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredPlaygrounds(filtered);
+    }
+  };
+
+  const handleClear = () => {
+    setFilteredPlaygrounds(playgroundInfo);
+  };
+
+  const handleFindNearMe = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const filtered = playgroundInfo.filter((info) => {
+            if (!info.surface?.the_geom?.coordinates) {
+              return false;
+            }
+
+            const polygonCoordinates = info.surface.the_geom.coordinates[0][0];
+
+            const [lng, lat] = polygonCoordinates[0];
+
+            const distance = calculateDistance(latitude, longitude, lat, lng);
+            return distance <= 5000;
+          });
+          setFilteredPlaygrounds(filtered);
+        },
+        (error) => {
+          toast.error(
+            "Unable to access your location. Please enable location services."
+          );
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by your browser.");
+    }
+  };
+
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371e3;
+    const φ1 = (lat1 * Math.PI) / 180;
+    const φ2 = (lat2 * Math.PI) / 180;
+    const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+    const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+
+    const a =
+      Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+      Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return R * c;
+  };
+
   return (
     <div className="mainContainer">
       <div className="playgroundList">
-        <Filter />
+        <Filter
+          onSearch={handleSearch}
+          onClear={handleClear}
+          onFindNearMe={handleFindNearMe}
+        />
         <div className="wrapper">
-          {playgroundInfo?.length > 0 ? (
-            playgroundInfo?.map((info) => <Card key={info._id} {...info} />)
+          {filteredPlaygrounds?.length > 0 ? (
+            filteredPlaygrounds.map((info) => <Card key={info._id} {...info} />)
           ) : (
-            <p>Loading playground information...</p>
+            <div className="loader-container">
+              <span className="loader"></span>
+            </div>
           )}
         </div>
       </div>
       <div className="mapContainer">
-        <Map items={playgroundInfo} />
+        <Map items={filteredPlaygrounds} onClusterClick={handleClusterClick} />
       </div>
+      <ToastContainer />
     </div>
   );
 };

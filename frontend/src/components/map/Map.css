@@ -25,3 +25,13 @@
     .leaflet-popup-close-button {
         display: none;
       }
+      @keyframes tiltAnimation {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(10deg); }
+        75% { transform: rotate(-10deg); }
+        100% { transform: rotate(0deg); }
+      }
+      
+      .custom-icon-tilt img {
+        animation: tiltAnimation 2s ease-in infinite;
+      }

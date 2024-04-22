@@ -50,6 +50,7 @@ img{
     flex-direction: row;
    gap: 5px;
    white-space: nowrap;
+   padding-bottom: 5px;
 }
 
 
@@ -88,4 +89,59 @@ img{
     font-size: 14px;
     max-width: max-content;
     border-radius: 5px;
+    
 }
+
+
+.buttonInfo {
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #492B6B;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #492B6B;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  outline: none;
+  padding: 8px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+}
+
+.buttonInfo:disabled {
+  pointer-events: none;
+}
+
+.buttonInfo:hover {
+  color: #fff;
+  background-color: #492B6B;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.buttonInfo:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+.modalInfo{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.equipmentInfo{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+

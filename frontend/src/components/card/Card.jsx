@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Card.css";
+import Modal from "../../component/modal/Modal";
 
 const Card = (props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const renderEquipment = (equipment) => {
     return equipment?.equipment?.map((item, index) => (
       <div key={index} className="playground">
@@ -35,7 +38,24 @@ const Card = (props) => {
         </div>
 
         <div className="features">{renderEquipment(equipment).slice(0, 3)}</div>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="buttonInfo"
+          role="button"
+        >
+          More Info
+        </button>
       </div>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <div className="modalInfo">
+          <h3>
+            {name && name.SITE_NAME
+              ? name.SITE_NAME
+              : "Community Park Playground"}
+          </h3>
+          <div className="equipmentInfo">{renderEquipment(equipment)}</div>
+        </div>
+      </Modal>
     </div>
   );
 };

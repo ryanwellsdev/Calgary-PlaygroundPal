@@ -1,5 +1,27 @@
-.map{
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
+.leaflet-container {
+  background-color: #f0f0f0; 
 }
+
+
+.communitySpan{
+  color: #492B6B;
+    font-weight: 600;
+    padding-right: 5px;
+  }
+  .nameSpan{
+      color: #492B6B;
+      font-weight: 600;
+      padding-right: 5px;
+    }
+    .leaflet-popup-content {
+        margin: 10px;
+      }
+      
+      .leaflet-popup-content-wrapper,
+      .leaflet-popup-tip {
+        background-color: white;
+        box-shadow: none;
+      }
+    .leaflet-popup-close-button {
+        display: none;
+      }

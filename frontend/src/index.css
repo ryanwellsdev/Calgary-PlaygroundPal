@@ -5,9 +5,6 @@
     font-family: "Roboto", sans-serif;
 }
 
-
-
-
 :root {
     --shadow: #43a047;
     --scrollbarBG: #C0DCB4;
@@ -24,9 +21,14 @@
   ::-webkit-scrollbar-thumb {
     background-color: var(--scrollbarBG);
     border-radius: 10px;
+    height: 100px;
     border: 1px solid var(--scrollbarBG);
     /* box-shadow: 0 0 0 0 var(--shadow), 0 0 15px 5px black; */
   } 
 
+  .leaflet-tile {
+    filter: hue-rotate(45deg) !important;
+  }
+  
 
   

@@ -1,0 +1,43 @@
+.FooterContainer{
+    height: 100px;
+    background-color: #492B6B;
+    position: fixed;
+left:0;
+bottom:0;
+right:0;
+
+}
+
+.instagram_footer {
+    position: relative;
+    float: left;
+    color: white;
+    font-size: 2em;
+    height: 65px;
+    margin-left: 20px;
+    margin-top: 20px;
+
+}
+
+.share_footer {
+    position: relative;
+    color: white;
+    font-size:2em;
+    height: 65px;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 110px;
+
+
+}
+
+.like_footer {
+    position: relative;
+    float: right;
+    color: white;
+    font-size: 2em;
+    height: 65px;
+    margin-right: 20px;
+    margin-top: 20px;
+
+}

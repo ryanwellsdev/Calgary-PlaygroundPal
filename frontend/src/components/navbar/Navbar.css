@@ -3,7 +3,7 @@
     height: 100px;
     background-color: #492B6B;
     width: 100%;
-    background-image: url(./PlaygroundPal_Logo_white.svg);
+    /* background-image: url(./PlaygroundPal_Logo_white.svg); */
     background-repeat: no-repeat;
     background-position: left;
     background-size: 200px;
@@ -11,11 +11,11 @@
 }
 
 
-.filter_navigation {
+/* .filter_navigation {
     position: relative;
     float: right;
     color: white;
     font-size: 3em;
     height: 100px;
     margin-right: 20px;
-}
+} */

@@ -22,7 +22,6 @@ const Filter = ({ onSearch, onClear, onFindNearMe }) => {
     <div className="filter">
       <h1>Calgary Playgrounds</h1>
       <div className="top">
-        <label htmlFor="search">Search for playgrounds</label>
         <div className="search">
           <div className="inputSearch">
             <input
@@ -35,12 +34,14 @@ const Filter = ({ onSearch, onClear, onFindNearMe }) => {
             />
             <CiSearch className="search-icon" />
           </div>
-          <button className="filterButton" onClick={handleSearchClick}>
-            Search
-          </button>
-          <button className="filterButton" onClick={handleSearchClear}>
-            Clear
-          </button>
+          <div className="searchButtons">
+            <button className="filterButton" onClick={handleSearchClick}>
+              Search
+            </button>
+            <button className="filterButton" onClick={handleSearchClear}>
+              Clear
+            </button>
+          </div>
         </div>
       </div>
       <div className="bottom">

@@ -3,31 +3,33 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* height: 100vh;  */
+  gap: 8px;
+ 
   text-align: center;
-  background-color: #f5f5f5; 
-  color: #333; 
-  /* padding: 20px; */
-padding-top: 20px;
-padding-bottom: 60px;
-  /* background-image: url('../path/to/PlaygroundPal_hand_icon.svg');  */
-  /* background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat; */
+    background: linear-gradient(62deg, #b1afd3, #a8ccec, #9cd3d5, #b2dcc1, #fce9b1);
+    animation: gradient 4s ease infinite; 
+    background-size: 400% 400%;
+    /* background-repeat: no-repeat; */
+  padding: 20px;
 }
 
+
+.link{
+  text-decoration: none;
+}
 .color_logo_landing {
-  max-width: 800px; 
-  margin-bottom: 10px;
+  max-width: 500px; 
+  margin-bottom: 9px;
 }
 
-h1, h2 {
+heading1, heading2 {
   margin: 10px 0; 
 }
 
-p {
-  max-width: 600px; 
-  margin-bottom: 30px; 
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .landing_page_button {
@@ -35,24 +37,24 @@ p {
   color: white;
   border: none;
   padding: 10px 20px;
-  font-size: 18px;
+  font-size: 16px;
   border-radius: 5px; 
   cursor: pointer;
   transition: background-color 0.3s ease; 
   font-family: "Syne", sans-serif;
   text-align: center;
   text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   background: 
   linear-gradient(#492B6B, #492B6B) padding-box,
   linear-gradient(60deg, #f8d345, #00b2b4) border-box;
   border: 5px solid transparent;
-  border-radius: 40px;
+  border-radius: 30px;
   margin: 0 auto;
   display: block;
   font-size: 1.5em;
-  margin-top: 60px;
+  margin-top: 32px;
   margin-right: 20px;
   margin-left: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -63,23 +65,53 @@ p {
 }
 
 .hand_icon_landing {
-  margin-top: 30px; 
-  max-width: 100px; 
+  margin-top: 8px; 
+  max-width: 50px; 
 }
 
 
 @media (max-width: 768px) {
   .home {
-    padding: 10px;
+    padding: 8px;
     background-size: contain; 
   }
+  .hand_icon_landing {
+    margin-top: 10px; 
+    max-width: 42px; 
+  }
 
-  p {
+  paragraph1 {
     max-width: 100%; 
+    
   }
 
   .landing_page_button {
-    padding: 8px 16px; 
+    padding: 8px 10px; 
     font-size: 16px;
+    margin-top: 20px;
+  }
+}
+
+
+@-webkit-keyframes gradient{
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+     background-position: 0% 50%;
+  }
+}
+@keyframes gradient{
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+     background-position: 0% 50%;
   }
 }

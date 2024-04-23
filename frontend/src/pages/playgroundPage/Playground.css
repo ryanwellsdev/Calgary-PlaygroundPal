@@ -1,10 +1,12 @@
 .mainContainer{
     display: flex;
     height: 100vh;
+    padding-top: 5px;
+  
 }
 .playgroundList{
     flex: 2;
-    height: 100%;
+    height: 99vh;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px;
     display: flex;
@@ -14,11 +16,17 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        gap: 10px;
         padding-right: 5px;
         padding-left: 5px;
         padding-top: 5px;
         overflow-y: auto; 
+
+        @media (max-width:768px) {
+            gap: 10px;
+            padding-right: 5px;
+            padding-left: 5px;
+        }
     
     }
      
@@ -28,6 +36,9 @@
     flex: 3;
     padding-left: 20px;
     height: 100%;
+    @media (max-width:768px) {
+        height: 100px;
+    }
    
     
 }
@@ -36,8 +47,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%; /* Adjust based on your needs */
+    height: 100%; 
     width: 100%;
+   
   }
   
 
@@ -97,10 +109,10 @@
 @keyframes hitL {
     0% {
         transform: rotate(0deg); 
-        background-color: #492B6B; /* Set the initial background color */
+        background-color: #492B6B; 
     }
     25%, 100% {
-        transform: rotate(45deg); /* Adjust the rotation angle to 45deg */
+        transform: rotate(45deg); 
         background-color: bisque;
     }
 }
@@ -115,3 +127,66 @@
     }
 
 }
+
+.toggleButton {
+  display: none;
+   @media (max-width: 768px) {
+    font-size: 35px;
+    color: #492B6B;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+   }
+    
+  }
+
+  .toggleHeading{
+    font-size: 15px;
+  }
+
+@media (max-width: 768px) {
+    .mainContainer {
+      flex-direction: column;
+      padding-top: 0;
+      align-items: center;
+  
+    }
+    
+    .playgroundList, 
+    .mapContainer {
+      padding: 0;
+      height: auto;
+      flex: column;
+      overflow: hidden;
+    }
+  
+   
+  .playgroundList{
+    display: flex;
+    flex-direction: column;
+    .wrapper{
+        overflow-y: scroll;
+    }
+  }
+    .toggleButton button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #492B6B;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    .toggleButton button.active {
+      background-color: #6c4698;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mapContainer {
+      display: block; 
+      height: 100px;
+      width: 100%; 
+    }
+  }

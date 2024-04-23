@@ -5,9 +5,30 @@ import Card from "../../components/card/Card";
 import Map from "../../components/map/Map";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
 
 const Playground = ({ playgroundInfo }) => {
   const [filteredPlaygrounds, setFilteredPlaygrounds] = useState([]);
+  const [showMap, setShowMap] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth < 768);
+
+  const handleResize = () => {
+    setIsMobileView(window.innerWidth < 768);
+  };
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const toggleMap = () => {
+    setShowMap(!showMap);
+    setToggle(!toggle);
+  };
 
   useEffect(() => {
     setFilteredPlaygrounds(playgroundInfo);
@@ -78,28 +99,73 @@ const Playground = ({ playgroundInfo }) => {
   };
 
   return (
-    <div className="mainContainer">
-      <div className="playgroundList">
-        <Filter
-          onSearch={handleSearch}
-          onClear={handleClear}
-          onFindNearMe={handleFindNearMe}
-        />
-        <div className="wrapper">
-          {filteredPlaygrounds?.length > 0 ? (
-            filteredPlaygrounds.map((info) => <Card key={info._id} {...info} />)
+    <>
+      {!isMobileView ? (
+        <div className="mainContainer">
+          <div className="playgroundList">
+            <Filter
+              onSearch={handleSearch}
+              onClear={handleClear}
+              onFindNearMe={handleFindNearMe}
+            />
+            <div className="wrapper">
+              {filteredPlaygrounds?.length > 0 ? (
+                filteredPlaygrounds.map((info) => (
+                  <Card key={info._id} {...info} />
+                ))
+              ) : (
+                <div className="loader-container">
+                  <span className="loader"></span>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="mapContainer">
+            <Map
+              items={filteredPlaygrounds}
+              onClusterClick={handleClusterClick}
+            />
+          </div>
+          <ToastContainer />
+        </div>
+      ) : (
+        <div className="mainContainer">
+          <Filter
+            onSearch={handleSearch}
+            onClear={handleClear}
+            onFindNearMe={handleFindNearMe}
+          />
+          <div className="toggleButton" onClick={toggleMap}>
+            <h1 className="toggleHeading">Map View</h1>
+            <div>{toggle ? <FaToggleOn /> : <FaToggleOff />}</div>
+            <h1 className="toggleHeading">List View</h1>
+          </div>
+          {showMap ? (
+            <div className="playgroundList">
+              <div className="wrapper">
+                {filteredPlaygrounds?.length > 0 ? (
+                  filteredPlaygrounds.map((info) => (
+                    <Card key={info._id} {...info} />
+                  ))
+                ) : (
+                  <div className="loader-container">
+                    <span className="loader"></span>
+                  </div>
+                )}
+              </div>
+            </div>
           ) : (
-            <div className="loader-container">
-              <span className="loader"></span>
+            <div className="mapContainer">
+              <Map
+                items={filteredPlaygrounds}
+                onClusterClick={handleClusterClick}
+              />
             </div>
           )}
+          <ToastContainer />
         </div>
-      </div>
-      <div className="mapContainer">
-        <Map items={filteredPlaygrounds} onClusterClick={handleClusterClick} />
-      </div>
-      <ToastContainer />
-    </div>
+      )}
+    </>
   );
 };
 

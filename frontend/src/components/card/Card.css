@@ -1,13 +1,13 @@
 .card{
     display: flex;
-    gap: 20px;
+    gap: 10px;
     padding: 8px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     background-color:aliceblue;
-    /* &:hover{
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-    } */
+   @media (max-width: 768px) {
+    gap: 5px;
+   }
 }
 h3{
     color: #492B6B;
@@ -17,11 +17,19 @@ flex: 3;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
-gap: 20px;
+gap: 15px;
+@media (max-width: 768px) {
+  gap: 10px;
+  justify-content: center;
+ }
 img{
     width: 16px;
     height: 16px;
     color: #492B6B;
+    @media (max-width: 768px) {
+      width: 12px;
+      height: 12px;
+     }
 }
 .description{
     color: #492B6B;
@@ -32,7 +40,18 @@ img{
 .nameContainer{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+    @media (max-width: 768px) {
+      gap: 10px;
+      display: flex;
+      .title{
+        font-size: 16px;
+      }
+      .description{
+        font-size: 16px;
+      }
+     
+     }
 }
 .address{
     font-size: 15px;
@@ -50,24 +69,32 @@ img{
     flex-direction: row;
    gap: 5px;
    white-space: nowrap;
-   padding-bottom: 5px;
+   padding-bottom: 2px;
+  
+
 }
 
 
   
   .hasAge {
     background-color: antiquewhite;
+    
   }
 
 .playground {
     display: grid; 
     grid-template-rows: 1fr 1fr; 
-    grid-gap: 10px; 
+    grid-gap: 5px; 
+    @media (max-width: 768px) {
+      grid-gap: 5px;
+     }
   }
   
   .ageClass, .descriptiontype {
     border: 1px solid #ccc; 
     padding: 10px; 
+    
+    
   }
 
 .community{
@@ -81,6 +108,9 @@ img{
     padding: 4px;
     max-width: max-content;
     border-radius: 5px;
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
 }
 .descriptiontype{
     background-color: #492B6B;
@@ -89,6 +119,13 @@ img{
     font-size: 14px;
     max-width: max-content;
     border-radius: 5px;
+    @media (max-width:768px) {
+      font-size: 8px;
+      background-color: #492B6B;
+    color: white;
+    padding: 2px;
+  
+     }
     
 }
 
@@ -108,7 +145,7 @@ img{
   line-height: normal;
   margin: 0;
   outline: none;
-  padding: 8px 24px;
+  padding: 8px 16px;
   text-align: center;
   text-decoration: none;
   transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
@@ -117,6 +154,10 @@ img{
   touch-action: manipulation;
   width: 100%;
   will-change: transform;
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 6px 16px;;
+   }
 }
 
 .buttonInfo:disabled {

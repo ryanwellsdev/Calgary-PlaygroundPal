@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import * as L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -20,6 +20,23 @@ const customIcon = (animate = false) => {
 const Map = ({ items, onClusterClick }) => {
   const mapRef = useRef(null);
   const clusterLayerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const mapStyle = {
+    width: "100%",
+    height: isMobile ? "80vh" : "98vh",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+    borderTopLeftRadius: isMobile ? "0" : "10px",
+  };
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -29,6 +46,7 @@ const Map = ({ items, onClusterClick }) => {
       mapRef.current = L.map(mapNode, {
         center: [51.049999, -114.066666],
         zoom: 10,
+        maxZoom: 17,
       });
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -39,10 +57,35 @@ const Map = ({ items, onClusterClick }) => {
     if (clusterLayerRef.current) {
       mapRef.current.removeLayer(clusterLayerRef.current);
     }
-
     clusterLayerRef.current = L.markerClusterGroup({
       showCoverageOnHover: false,
+      iconCreateFunction: function (cluster) {
+        return L.divIcon({
+          html: `<div style="background-color: #f28f43; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #ffffff;">${cluster.getChildCount()}</div>`,
+          className: "custom-cluster-icon",
+          iconSize: L.point(40, 40),
+        });
+      },
     });
+    // clusterLayerRef.current = L.markerClusterGroup({
+    //   showCoverageOnHover: false,
+    //   iconCreateFunction: function (cluster) {
+    //     const count = cluster.getChildCount();
+
+    //     const iconHtml = `
+    //   <div style="background-color: #f69d45; color: #492B6B; width: 60px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10%; color: #ffffff;">
+    //     <img src="./playgroundpal_map_marker_green.svg" style="width: 30px; height: 30px; margin-right: 8px;">
+    //     ${count}
+    //   </div>
+    // `;
+
+    //     return L.divIcon({
+    //       html: iconHtml,
+    //       className: "custom-cluster-icon",
+    //       iconSize: L.point(30, 30),
+    //     });
+    //   },
+    // });
 
     clusterLayerRef.current.on("clusterclick", (a) => {
       const clusterItems = a.layer
@@ -56,12 +99,7 @@ const Map = ({ items, onClusterClick }) => {
         const polygonCoordinates = item.surface.the_geom.coordinates[0][0].map(
           ([lng, lat]) => [lat, lng]
         );
-        // const playgroundPolygon = L.polygon(polygonCoordinates, {
-        //   color: "blue",
-        //   fillColor: "#f03",
-        //   fillOpacity: 0.5,
-        // }).addTo(mapRef.current);
-        // playgroundPolygon.bindPopup("Playground Name or Any Info");
+
         const markerPosition = polygonCoordinates[0];
         const popupContent = `
         <div class="popupContainer">
@@ -91,17 +129,7 @@ const Map = ({ items, onClusterClick }) => {
     mapRef.current.addLayer(clusterLayerRef.current);
   }, [items, onClusterClick]);
 
-  return (
-    <div
-      id="map"
-      style={{
-        width: "100%",
-        height: "90vh",
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-        borderTopLeftRadius: "10px",
-      }}
-    />
-  );
+  return <div id="map" style={mapStyle} />;
 };
 
 export default Map;

@@ -13,7 +13,7 @@ const App = () => {
     try {
       const response = await fetch("/api/playground");
       const data = await response.json();
-      const limitedData = data.slice(0, 600);
+      const limitedData = data.slice(0, 200);
       setPlaygroundInfo(limitedData);
       console.log(data, "dfafsdfsdf");
     } catch (error) {

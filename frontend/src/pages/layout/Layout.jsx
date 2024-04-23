@@ -6,13 +6,11 @@ import Footer from "../../components/footer/Footer";
 const Layout = () => {
   return (
     <div className="layout">
-      <div className="navbar">
-        <Navbar />
-      </div>
+      <Navbar />
       <div className="content">
         <Outlet />
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

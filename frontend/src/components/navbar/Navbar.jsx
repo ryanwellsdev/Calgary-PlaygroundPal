@@ -1,15 +1,13 @@
 import React from "react";
 import "./Navbar.css";
-import { BsFilterRight } from "react-icons/bs";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 const Navbar = () => {
-
-  return <div className="NavbarContainer">
-    <BsFilterRight className="filter_navigation"/>
-
-  
-</div>;
-
+  return (
+    <div className="NavbarContainer">
+      <img src="./PlaygroundPal_Logo_white.svg" alt="" className="logo" />
+    </div>
+  );
 };
 
 export default Navbar;

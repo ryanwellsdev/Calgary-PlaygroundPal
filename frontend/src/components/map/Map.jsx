@@ -57,35 +57,35 @@ const Map = ({ items, onClusterClick }) => {
     if (clusterLayerRef.current) {
       mapRef.current.removeLayer(clusterLayerRef.current);
     }
-    clusterLayerRef.current = L.markerClusterGroup({
-      showCoverageOnHover: false,
-      iconCreateFunction: function (cluster) {
-        return L.divIcon({
-          html: `<div style="background-color: #f28f43; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #ffffff;">${cluster.getChildCount()}</div>`,
-          className: "custom-cluster-icon",
-          iconSize: L.point(40, 40),
-        });
-      },
-    });
     // clusterLayerRef.current = L.markerClusterGroup({
     //   showCoverageOnHover: false,
     //   iconCreateFunction: function (cluster) {
-    //     const count = cluster.getChildCount();
-
-    //     const iconHtml = `
-    //   <div style="background-color: #f69d45; color: #492B6B; width: 60px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10%; color: #ffffff;">
-    //     <img src="./playgroundpal_map_marker_green.svg" style="width: 30px; height: 30px; margin-right: 8px;">
-    //     ${count}
-    //   </div>
-    // `;
-
     //     return L.divIcon({
-    //       html: iconHtml,
+    //       html: `<div style="background-color: #f28f43; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #ffffff;">${cluster.getChildCount()}</div>`,
     //       className: "custom-cluster-icon",
-    //       iconSize: L.point(30, 30),
+    //       iconSize: L.point(40, 40),
     //     });
     //   },
     // });
+    clusterLayerRef.current = L.markerClusterGroup({
+      showCoverageOnHover: false,
+      iconCreateFunction: function (cluster) {
+        const count = cluster.getChildCount();
+
+        const iconHtml = `
+      <div style="background-color: #f69d45; color: #492B6B; width: 60px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10%; color: #492B6B;">
+        <img src="./playgroundpal_map_marker_green.svg" style="width: 30px; height: 30px; margin-right: 8px;">
+        ${count}
+      </div>
+    `;
+
+        return L.divIcon({
+          html: iconHtml,
+          className: "custom-cluster-icon",
+          iconSize: L.point(30, 30),
+        });
+      },
+    });
 
     clusterLayerRef.current.on("clusterclick", (a) => {
       const clusterItems = a.layer

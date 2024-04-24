@@ -98,6 +98,22 @@ const Playground = ({ playgroundInfo }) => {
     return R * c;
   };
 
+  const handleEquipmentSelect = (selectedEquipmentType) => {
+    if (!selectedEquipmentType) {
+      setFilteredPlaygrounds(playgroundInfo);
+      return;
+    }
+
+    const filtered = playgroundInfo.filter((playground) =>
+      playground.equipment?.equipment?.some(
+        (equipmentItem) =>
+          equipmentItem.TYPE_DESCRIPTION.toLowerCase() ===
+          selectedEquipmentType.toLowerCase()
+      )
+    );
+    setFilteredPlaygrounds(filtered);
+  };
+
   return (
     <>
       {!isMobileView ? (
@@ -107,6 +123,7 @@ const Playground = ({ playgroundInfo }) => {
               onSearch={handleSearch}
               onClear={handleClear}
               onFindNearMe={handleFindNearMe}
+              onEquipmentSelect={handleEquipmentSelect}
             />
             <div className="wrapper">
               {filteredPlaygrounds?.length > 0 ? (
@@ -134,6 +151,7 @@ const Playground = ({ playgroundInfo }) => {
             onSearch={handleSearch}
             onClear={handleClear}
             onFindNearMe={handleFindNearMe}
+            onEquipmentSelect={handleEquipmentSelect}
           />
           <div className="toggleButton" onClick={toggleMap}>
             <h1 className="toggleHeading">Map View</h1>

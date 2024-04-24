@@ -162,6 +162,56 @@ font-weight: 900;
 
 
 
+
+.equipmentDropdown {
+  width: 100%; 
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 2px solid #6C4698 ; 
+  outline: none;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  @media (max-width: 768px) {
+    padding: 9px 10px;
+    font-size: 10px;
+  }
+}
+
+
+.equipmentDropdown:focus {
+  box-shadow: 0 0 0 2px #6C4698 
+}
+
+
+.equipmentDropdown {
+  appearance: none; 
+  -moz-appearance: none; 
+  -webkit-appearance: none; 
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z" fill="6C4698 "/></svg>'); 
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  
+}
+@media (max-width: 768px) {
+  .equipmentDropdown option {
+    padding: 2px 2px; 
+  }
+}
+
+option {
+  padding: 10px;
+  background-color: #fff;
+  color: #6C4698 ;
+
+  
+}
+
+
+
 @media (max-width: 768px) {
 
   .filter{

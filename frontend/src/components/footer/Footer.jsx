@@ -1,18 +1,20 @@
 import React from "react";
 import "./Footer.css";
-import { FaInstagram } from "react-icons/fa6";
-import { IoShareSocialSharp } from "react-icons/io5";
-import { FaRegHeart } from "react-icons/fa";
+
+const NameLink = ({ name, url }) => (
+  <span className="name-link">
+    <a href={url} target="_blank" rel="noopener noreferrer">{name}</a>,
+  </span>
+);
 
 const Footer = () => {
   return (
     <div className="FooterContainer">
-      <div className="footer-icons">
-        {" "}
-        <FaInstagram className="instagram_footer" />
-        <IoShareSocialSharp className="share_footer" />
-        <FaRegHeart className="like_footer" />
-      </div>
+      <p className="footer-text">
+        <NameLink name="Abbas Anosh" url="https://github.com/AbbasAnosh" />
+        <NameLink name="Mia Taylor" url="https://github.com/Mrsaless" />
+        <NameLink name="Ryan Wells" url="https://github.com/ryanwellsdev" />
+      </p>
     </div>
   );
 };

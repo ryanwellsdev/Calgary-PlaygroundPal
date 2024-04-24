@@ -1,32 +1,42 @@
 .FooterContainer {
-    height: 80px;
-    background-color: #492B6B;
-    display: flex;
-    justify-content: center; 
-    @media (max-width:768px) {
-      display: none;
-    }
+  height: 80px;
+  background-color: #492B6B;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width:768px) {
+    display: none;
   }
-  
-  .footer-icons {
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    max-width: 200px; 
-    margin: 0 auto; 
-  }
-  
-  .instagram_footer,
-  .share_footer,
-  .like_footer {
-    font-size: 24px; 
-    color: white; 
-    margin: 0 20px; 
-  }
+}
 
+.footer-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
 
+.name-link {
+  margin-right: 10px;
+}
 
+.name-link a {
+  color: #ffffff;
+  text-decoration: none;
+}
 
+.name-link a:hover,
+.name-link a:active,
+.name-link a:visited {
+  color: #ffffff;
+  text-decoration: underline;
+}
 
-
-
+.footer-text::before {
+  content: "Developed by: ";
+  font-weight: bold;
+  color: #FFF;
+  margin-right: 5px;
+}

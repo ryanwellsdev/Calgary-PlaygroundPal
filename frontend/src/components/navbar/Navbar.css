@@ -1,16 +1,15 @@
 .NavbarContainer {
-    display: flex;
-    height: 80px;
-    justify-content: center;
-    align-items: center; 
-   
-    background-color: #492B6B; 
-    color: white; 
-  }
-  
-  .logo {
-    max-width: 150px; 
-    height: auto; 
-    
-  }
- 
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #492B6B;
+  color: white;
+}
+
+.logo {
+  max-width: 150px;
+  height: auto;
+
+}

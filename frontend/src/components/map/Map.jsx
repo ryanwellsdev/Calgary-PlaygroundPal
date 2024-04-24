@@ -17,9 +17,10 @@ const customIcon = (animate = false) => {
   return iconElement;
 };
 
-const Map = ({ items, onClusterClick }) => {
+const Map = ({ items, onClusterClick, userLocation }) => {
   const mapRef = useRef(null);
   const clusterLayerRef = useRef(null);
+  const userMarkerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
@@ -57,16 +58,6 @@ const Map = ({ items, onClusterClick }) => {
     if (clusterLayerRef.current) {
       mapRef.current.removeLayer(clusterLayerRef.current);
     }
-    // clusterLayerRef.current = L.markerClusterGroup({
-    //   showCoverageOnHover: false,
-    //   iconCreateFunction: function (cluster) {
-    //     return L.divIcon({
-    //       html: `<div style="background-color: #f28f43; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #ffffff;">${cluster.getChildCount()}</div>`,
-    //       className: "custom-cluster-icon",
-    //       iconSize: L.point(40, 40),
-    //     });
-    //   },
-    // });
     clusterLayerRef.current = L.markerClusterGroup({
       showCoverageOnHover: false,
       iconCreateFunction: function (cluster) {
@@ -126,8 +117,19 @@ const Map = ({ items, onClusterClick }) => {
       }
     });
 
+    if (userLocation && mapRef.current) {
+      if (userMarkerRef.current) {
+        mapRef.current.removeLayer(userMarkerRef.current);
+      }
+      userMarkerRef.current = L.marker([
+        userLocation.lat,
+        userLocation.lng,
+      ]).addTo(mapRef.current);
+      mapRef.current.setView([userLocation.lat, userLocation.lng], 14);
+    }
+
     mapRef.current.addLayer(clusterLayerRef.current);
-  }, [items, onClusterClick]);
+  }, [items, onClusterClick, userLocation]);
 
   return <div id="map" style={mapStyle} />;
 };

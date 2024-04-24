@@ -12,6 +12,7 @@ const Playground = ({ playgroundInfo }) => {
   const [showMap, setShowMap] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [isMobileView, setIsMobileView] = useState(window.innerWidth < 768);
+  const [userLocation, setUserLocation] = useState(null); // State to store user's location
 
   const handleResize = () => {
     setIsMobileView(window.innerWidth < 768);
@@ -58,15 +59,15 @@ const Playground = ({ playgroundInfo }) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
+          setUserLocation({ lat: latitude, lng: longitude });
+
           const filtered = playgroundInfo.filter((info) => {
             if (!info.surface?.the_geom?.coordinates) {
               return false;
             }
 
             const polygonCoordinates = info.surface.the_geom.coordinates[0][0];
-
             const [lng, lat] = polygonCoordinates[0];
-
             const distance = calculateDistance(latitude, longitude, lat, lng);
             return distance <= 5000;
           });
@@ -79,7 +80,7 @@ const Playground = ({ playgroundInfo }) => {
         }
       );
     } else {
-      alert("Geolocation is not supported by your browser.");
+      toast.error("Geolocation is not supported by your browser.");
     }
   };
 
@@ -141,6 +142,7 @@ const Playground = ({ playgroundInfo }) => {
             <Map
               items={filteredPlaygrounds}
               onClusterClick={handleClusterClick}
+              userLocation={userLocation}
             />
           </div>
           <ToastContainer />
@@ -171,12 +173,14 @@ const Playground = ({ playgroundInfo }) => {
                   </div>
                 )}
               </div>
+              s
             </div>
           ) : (
             <div className="mapContainer">
               <Map
                 items={filteredPlaygrounds}
                 onClusterClick={handleClusterClick}
+                userLocation={userLocation}
               />
             </div>
           )}

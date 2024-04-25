@@ -1,59 +1,61 @@
 .home {
   display: flex;
-  height: 750px;
+  height: 86vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 8px;
- 
+
   text-align: center;
-    background: linear-gradient(62deg, #b1afd3, #a8ccec, #9cd3d5, #b2dcc1, #fce9b1);
-    animation: gradient 4s ease infinite; 
-    background-size: 400% 400%;
-    /* background-repeat: no-repeat; */
+  background: linear-gradient(62deg, #b1afd3, #a8ccec, #9cd3d5, #b2dcc1, #fce9b1);
+  animation: gradient 4s ease infinite;
+  background-size: 400% 400%;
+  /* background-repeat: no-repeat; */
   padding: 20px;
 }
 
 
-.link{
+.link {
   text-decoration: none;
 }
+
 .color_logo_landing {
-  max-width: 500px; 
+  max-width: 500px;
   margin-bottom: 40px;
 }
 
-heading1, heading2 {
-  margin: 5px 0; 
+heading1,
+heading2 {
+  margin: 5px 0;
 }
 
 .heading2 {
   font-size: 3em;
 }
 
-.content{
+.content {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
 .landing_page_button {
-  background-color: #007bff; 
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 20px 30px;
   font-size: 16px;
-  border-radius: 5px; 
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
   font-family: "Syne", sans-serif;
   text-align: center;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.01em;
-  background: 
-  linear-gradient(#492B6B, #492B6B) padding-box,
-  linear-gradient(60deg, #f8d345, #00b2b4) border-box;
+  background:
+    linear-gradient(#492B6B, #492B6B) padding-box,
+    linear-gradient(60deg, #f8d345, #00b2b4) border-box;
   border: 4px solid transparent;
   border-radius: 30px;
   margin: 0 auto;
@@ -66,57 +68,63 @@ heading1, heading2 {
 }
 
 .landing_page_button:hover {
-  background-color: #0056b3; 
+  background-color: #0056b3;
 }
 
 .hand_icon_landing {
-  margin-top: 8px; 
-  max-width: 50px; 
+  margin-top: 8px;
+  max-width: 50px;
 }
 
 
 @media (max-width: 768px) {
   .home {
     padding: 8px;
-    background-size: contain; 
+    background-size: contain;
   }
+
   .hand_icon_landing {
-    margin-top: 10px; 
-    max-width: 42px; 
+    margin-top: 10px;
+    max-width: 42px;
   }
 
   paragraph1 {
-    max-width: 100%; 
-    
+    max-width: 100%;
+
   }
 
   .landing_page_button {
-    padding: 20px 30px; 
+    padding: 20px 30px;
     font-size: 16px;
     margin-top: 20px;
   }
 }
 
 
-@-webkit-keyframes gradient{
+@-webkit-keyframes gradient {
   0% {
     background-position: 0 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
-     background-position: 0% 50%;
+    background-position: 0% 50%;
   }
 }
-@keyframes gradient{
+
+@keyframes gradient {
   0% {
     background-position: 0 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
-     background-position: 0% 50%;
+    background-position: 0% 50%;
   }
 }

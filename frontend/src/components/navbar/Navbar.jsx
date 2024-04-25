@@ -1,11 +1,16 @@
 import React from "react";
 import "./Navbar.css";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
-
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/');
+  };
+
   return (
     <div className="NavbarContainer">
-      <img src="./PlaygroundPal_Logo_white.svg" alt="" className="logo" />
+      <img src="./PlaygroundPal_Logo_white.svg" alt="" className="logo" onClick={handleClick} />
     </div>
   );
 };

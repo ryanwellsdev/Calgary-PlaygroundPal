@@ -3,7 +3,7 @@ import "./Footer.css";
 
 const NameLink = ({ name, url }) => (
   <span className="name-link">
-    <a href={url} target="_blank" rel="noopener noreferrer">{name}</a>,
+    <a href={url} target="_blank" rel="noopener noreferrer">{name}</a>
   </span>
 );
 

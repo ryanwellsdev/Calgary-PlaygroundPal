@@ -46,7 +46,7 @@ const Map = ({ items, onClusterClick, userLocation, onPlaygroundSelect }) => {
 
       mapRef.current = L.map(mapNode, {
         center: [51.049999, -114.066666],
-        zoom: 10,
+        zoom: 11,
         maxZoom: 17,
       });
 
@@ -96,11 +96,10 @@ const Map = ({ items, onClusterClick, userLocation, onPlaygroundSelect }) => {
         <div class="popupContainer">
           <p class="link">
             <span class="nameSpan">Name:</span>
-            ${
-              item.name && item.name.SITE_NAME
-                ? item.name.SITE_NAME
-                : "Community Park Playground"
-            }
+            ${item.name && item.name.SITE_NAME
+            ? item.name.SITE_NAME
+            : "Community Park Playground"
+          }
           </p>
           <p class="link">
             <span class="communitySpan">Community:</span>

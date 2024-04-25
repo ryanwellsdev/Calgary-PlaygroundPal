@@ -17,7 +17,13 @@ const Card = (props) => {
       </div>
     ));
   };
-  const { name, equipment } = props;
+  const { name, equipment, surface } = props;
+  const firstItemCoordinates = surface?.the_geom?.coordinates[0][0];
+
+  const latitude = firstItemCoordinates[0][1];
+  const longitude = firstItemCoordinates[0][0];
+
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
 
   return (
     <div className="card">
@@ -54,6 +60,9 @@ const Card = (props) => {
               : "Community Park Playground"}
           </h3>
           <div className="equipmentInfo">{renderEquipment(equipment)}</div>
+          <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
+            <button className="buttonInfo">View on Google Maps</button>
+          </a>
         </div>
       </Modal>
     </div>

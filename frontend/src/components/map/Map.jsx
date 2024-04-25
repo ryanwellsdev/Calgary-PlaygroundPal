@@ -17,7 +17,7 @@ const customIcon = (animate = false) => {
   return iconElement;
 };
 
-const Map = ({ items, onClusterClick, userLocation }) => {
+const Map = ({ items, onClusterClick, userLocation, onPlaygroundSelect }) => {
   const mapRef = useRef(null);
   const clusterLayerRef = useRef(null);
   const userMarkerRef = useRef(null);
@@ -113,6 +113,7 @@ const Map = ({ items, onClusterClick, userLocation }) => {
           item: item,
         })
           .bindPopup(popupContent)
+          .on("click", () => onPlaygroundSelect(item))
           .addTo(clusterLayerRef.current);
       }
     });

@@ -12,8 +12,12 @@ const Playground = ({ playgroundInfo }) => {
   const [showMap, setShowMap] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [isMobileView, setIsMobileView] = useState(window.innerWidth < 768);
-  const [userLocation, setUserLocation] = useState(null); // State to store user's location
+  const [userLocation, setUserLocation] = useState(null);
+  const [selectedPlayground, setSelectedPlayground] = useState(null);
 
+  const handlePlaygroundSelect = (playground) => {
+    setSelectedPlayground(playground);
+  };
   const handleResize = () => {
     setIsMobileView(window.innerWidth < 768);
   };
@@ -52,6 +56,7 @@ const Playground = ({ playgroundInfo }) => {
 
   const handleClear = () => {
     setFilteredPlaygrounds(playgroundInfo);
+    setSelectedPlayground(null);
   };
 
   const handleFindNearMe = () => {
@@ -126,7 +131,17 @@ const Playground = ({ playgroundInfo }) => {
               onFindNearMe={handleFindNearMe}
               onEquipmentSelect={handleEquipmentSelect}
             />
+
             <div className="wrapper">
+              {selectedPlayground ? (
+                <Card key={selectedPlayground._id} {...selectedPlayground} />
+              ) : (
+                filteredPlaygrounds.map((info) => (
+                  <Card key={info._id} {...info} />
+                ))
+              )}
+            </div>
+            {/* <div className="wrapper">
               {filteredPlaygrounds?.length > 0 ? (
                 filteredPlaygrounds.map((info) => (
                   <Card key={info._id} {...info} />
@@ -136,13 +151,14 @@ const Playground = ({ playgroundInfo }) => {
                   <span className="loader"></span>
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
           <div className="mapContainer">
             <Map
               items={filteredPlaygrounds}
               onClusterClick={handleClusterClick}
               userLocation={userLocation}
+              onPlaygroundSelect={handlePlaygroundSelect}
             />
           </div>
           <ToastContainer />
@@ -162,7 +178,7 @@ const Playground = ({ playgroundInfo }) => {
           </div>
           {showMap ? (
             <div className="playgroundList">
-              <div className="wrapper">
+              {/* <div className="wrapper">
                 {filteredPlaygrounds?.length > 0 ? (
                   filteredPlaygrounds.map((info) => (
                     <Card key={info._id} {...info} />
@@ -172,8 +188,16 @@ const Playground = ({ playgroundInfo }) => {
                     <span className="loader"></span>
                   </div>
                 )}
+              </div> */}
+              <div className="wrapper">
+                {selectedPlayground ? (
+                  <Card key={selectedPlayground._id} {...selectedPlayground} />
+                ) : (
+                  filteredPlaygrounds.map((info) => (
+                    <Card key={info._id} {...info} />
+                  ))
+                )}
               </div>
-              s
             </div>
           ) : (
             <div className="mapContainer">
@@ -181,6 +205,7 @@ const Playground = ({ playgroundInfo }) => {
                 items={filteredPlaygrounds}
                 onClusterClick={handleClusterClick}
                 userLocation={userLocation}
+                onPlaygroundSelect={handlePlaygroundSelect}
               />
             </div>
           )}

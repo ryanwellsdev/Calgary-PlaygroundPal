@@ -18,12 +18,30 @@ const Card = (props) => {
     ));
   };
   const { name, equipment, surface } = props;
-  const firstItemCoordinates = surface?.the_geom?.coordinates[0][0];
+  // const firstItemCoordinates = surface?.the_geom?.coordinates[0][0];
 
-  const latitude = firstItemCoordinates[0][1];
-  const longitude = firstItemCoordinates[0][0];
+  // const latitude = firstItemCoordinates[0][1];
+  // const longitude = firstItemCoordinates[1][0];
+  // console.log(latitude, "latitude sdlfjs;dlfj");
 
-  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+  // const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+
+  const firstItemCoordinates = surface?.the_geom?.coordinates?.[0]?.[0];
+
+  // Check if firstItemCoordinates is defined and has the expected structure
+  let latitude, longitude, googleMapsUrl;
+  if (
+    firstItemCoordinates &&
+    Array.isArray(firstItemCoordinates) &&
+    firstItemCoordinates.length >= 2
+  ) {
+    const latitude = firstItemCoordinates[0][1];
+    const longitude = firstItemCoordinates[1][0];
+    googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+  } else {
+    // Handle the case where coordinates are not available
+    googleMapsUrl = "#"; // Default to a placeholder or error message
+  }
 
   return (
     <div className="card">

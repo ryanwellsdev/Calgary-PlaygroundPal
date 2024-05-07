@@ -11,7 +11,9 @@ const App = () => {
 
   async function fetchPlaygroundInfo() {
     try {
-      const response = await fetch("/api/playground");
+      const response = await fetch(
+        "https://inceptionu-calgary-playgroundpal.onrender.com/api/playground"
+      );
       const data = await response.json();
       const limitedData = data.slice(0, 200);
       setPlaygroundInfo(limitedData);

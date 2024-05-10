@@ -1,6 +1,6 @@
 .home {
   display: flex;
-  height: 86vh;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -10,10 +10,14 @@
   background: linear-gradient(62deg, #b1afd3, #a8ccec, #9cd3d5, #b2dcc1, #fce9b1);
   animation: gradient 4s ease infinite;
   background-size: 400% 400%;
-  /* background-repeat: no-repeat; */
   padding: 20px;
 }
-
+.paragraph1{
+  font-size: 1.5em;
+  @media (max-width:768px) {
+    font-size: 0.9em;
+  }
+}
 
 .link {
   text-decoration: none;
@@ -31,6 +35,7 @@ heading2 {
 
 .heading2 {
   font-size: 3em;
+  color: #492B6B;
 }
 
 .content {

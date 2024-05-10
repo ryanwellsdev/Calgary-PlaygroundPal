@@ -5,10 +5,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   @media (max-width:768px) {
-    display: flex;
+    height: 140px;
   }
+
+
+ 
 }
 
 .footer-text {
@@ -16,6 +18,11 @@
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
+  @media (max-width:768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 .name-link {

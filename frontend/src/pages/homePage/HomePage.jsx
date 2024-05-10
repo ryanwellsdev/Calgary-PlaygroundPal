@@ -15,7 +15,8 @@ const HomePage = () => {
         <h2 className="heading1">Welcome To</h2>
         <h1 className="heading2">Playground Pal</h1>
         <p className="paragraph1">
-          Welcome to our Playpal app, an easy way to find playgrounds near you!
+          Welcome to our PlaygroundPal app, an easy way to find playgrounds near
+          you!
           <br />
           To begin please click on the button below to access our main page
           <br />

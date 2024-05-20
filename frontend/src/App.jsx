@@ -15,7 +15,7 @@ const App = () => {
         "https://inceptionu-calgary-playgroundpal.onrender.com/api/playground"
       );
       const data = await response.json();
-      const limitedData = data;
+      const limitedData = data.slice(0, 100);
       setPlaygroundInfo(limitedData);
       console.log(data, "dfafsdfsdf");
     } catch (error) {

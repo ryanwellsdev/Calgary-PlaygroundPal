@@ -29,30 +29,34 @@ router.get("/:assetCd", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const equipmentData = await PlaygroundEquipment.find({});
-
-    const nameData = await PlaygroundName.find({});
-
-    const surfaceData = await PlaygroundSurface.find({});
-
-    const allPlaygrounds = equipmentData.map((equipment) => {
-      const assetCd = equipment.ASSET_CD;
-      const name = nameData.find((name) => name.ASSET_CD === assetCd);
-      const surface = surfaceData.find(
-        (surface) => surface.ASSET_CD === assetCd
-      );
-
-      return {
-        ASSET_CD: assetCd,
-        equipment,
-        name,
-        surface,
-      };
-    });
+    const allPlaygrounds = await PlaygroundEquipment.aggregate([
+      {
+        $lookup: {
+          from: "playgroundnames",
+          localField: "ASSET_CD",
+          foreignField: "ASSET_CD",
+          as: "name",
+        },
+      },
+      {
+        $lookup: {
+          from: "playgroundsurfaces",
+          localField: "ASSET_CD",
+          foreignField: "ASSET_CD",
+          as: "surface",
+        },
+      },
+      {
+        $unwind: { path: "$name", preserveNullAndEmptyArrays: true },
+      },
+      {
+        $unwind: { path: "$surface", preserveNullAndEmptyArrays: true },
+      },
+    ]);
 
     res.json(allPlaygrounds);
   } catch (error) {
-    console.error("Error fetching all playgrounds:", error);
+    console.error("Error aggregating playgrounds:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });

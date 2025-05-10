@@ -1,20 +1,38 @@
-import express from "express"
+import express from "express";
+import cors from "cors";
 import { getEquipmentByPlayground } from "./playgrounds.js";
 
-const app = express()
+const app = express();
 
+// Enable CORS so frontend (e.g. on Netlify) can make requests
+app.use(cors());
+
+// Optional: Middleware to log all requests
 app.all("*", (req, res, next) => {
-    console.log("path is", req.path);
-    next();
+  console.log("Path:", req.path);
+  next();
 });
 
-app.get("/api/:id", (req, res ) => {res.send(`api, route ${id}`)})
+// Example dynamic route
+app.get("/api/:id", (req, res) => {
+  const id = req.params.id;
+  res.send(`API route for ID: ${id}`);
+});
 
-app.get("/api/equipment/:id", async (req, res ) => {
-    const id= req.params.id
-    console.log(id)
-    const equipment = await getEquipmentByPlayground(id) 
-    res.send(equipment)
-})
+// Equipment API route
+app.get("/api/equipment/:id", async (req, res) => {
+  const id = req.params.id;
+  console.log("Equipment ID:", id);
 
-app.listen(3000, () =>console.log("listening on port 3000"))
+  try {
+    const equipment = await getEquipmentByPlayground(id);
+    res.json(equipment);
+  } catch (error) {
+    console.error("Error fetching equipment:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Use dynamic port for hosting, fallback to 3000 locally
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

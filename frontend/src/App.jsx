@@ -12,12 +12,12 @@ const App = () => {
   async function fetchPlaygroundInfo() {
     try {
       const response = await fetch(
-        "https://inceptionu-calgary-playgroundpal.onrender.com/api/playground"
+        `${import.meta.env.VITE_API_URL}/api/playground`
       );
       const data = await response.json();
       const limitedData = data.slice(0, 100);
       setPlaygroundInfo(limitedData);
-      console.log(data, "dfafsdfsdf");
+      console.log(data, "Playground data");
     } catch (error) {
       console.error("Failed to fetch playground info:", error);
     }

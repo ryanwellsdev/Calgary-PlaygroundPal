@@ -4,12 +4,15 @@ router.get("/", async (req, res) => {
     const nameData = await PlaygroundName.find({}).lean();
     const surfaceData = await PlaygroundSurface.find({}).lean();
 
+    if (!equipmentData.length) {
+      return res.status(404).json({ error: "No equipment data found" });
+    }
+
     const allPlaygrounds = equipmentData.map((equipment) => {
       const assetCd = equipment.ASSET_CD;
-      const name = nameData.find((name) => name.ASSET_CD === assetCd);
-      const surface = surfaceData.find(
-        (surface) => surface.ASSET_CD === assetCd
-      );
+
+      const name = nameData.find((n) => n.ASSET_CD === assetCd) || {};
+      const surface = surfaceData.find((s) => s.ASSET_CD === assetCd) || {};
 
       return {
         ASSET_CD: assetCd,
